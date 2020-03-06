@@ -23,9 +23,9 @@ import javafx.event.ActionEvent;
 
 @Service
 public class ChatWebsocketTopic {
-	
-	private static String URL = "http://localhost:8080/chat-websocket";
-	
+
+	private static String URL = "http://180.177.87.107:8080/chat-websocket";
+
 	private Transport webSocketTransport = new WebSocketTransport(new StandardWebSocketClient());
     private List<Transport> transports = Collections.singletonList(webSocketTransport);
     private SockJsClient sockJsClient = new SockJsClient(transports);
@@ -33,7 +33,8 @@ public class ChatWebsocketTopic {
     private StompSessionHandler sessionHandler = new ChatWebsocketTopicSubscribe();
     private StompSession stompSession;
 
-    @Autowired
+
+//    @Autowired
     public void connectWs() throws InterruptedException, ExecutionException {
 
     	stompClient.setMessageConverter(new MappingJackson2MessageConverter());
@@ -55,7 +56,7 @@ public class ChatWebsocketTopic {
 		mensaje.setFecha(null);
 		mensaje.setTexto("prueba desde java client");
 		mensaje.setTipo("NUEVO_USUARIO");
-		mensaje.setUsername("java client");
+		mensaje.setUsername(System.getProperty("user.name"));
 
 		stompSession.send("/app/mensaje", mensaje);
 

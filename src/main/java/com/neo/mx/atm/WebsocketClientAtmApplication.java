@@ -9,7 +9,7 @@ public class WebsocketClientAtmApplication {
 
 	public static void main(String[] args) {
 //		SpringApplication.run(WebsocketClientAtmApplication.class, args);
-		
+
 		Application.launch(JavaFxApplication.class, args);
 	}
 
