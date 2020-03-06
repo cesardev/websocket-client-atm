@@ -14,10 +14,11 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>websocket-client-atm</name>
 	<description>Aplicación spring y javafx cliente para comunicación con mensajes de atm</description>
+	<packaging>jar</packaging>
 
 	<properties>
 		<java.version>1.8</java.version>
-		<locallibs>D:\Neo-crm\Workspace-test\websocket-client-atm\src\main\resources\libs</locallibs>
+		<locallibs>D:\cesar\Cesarstudent\STS-Courses\Workspace-spring-angular\websocket-client-atm\src\main\resources\libs</locallibs>
 	</properties>
 
 	<dependencies>
@@ -90,6 +91,20 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<classifier>spring-boot</classifier>
+							<mainClass>
+								com.neo.mx.atm.WebsocketClientAtmApplication
+							</mainClass>
+							<includeSystemScope>true</includeSystemScope>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

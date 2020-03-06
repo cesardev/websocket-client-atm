@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandler;
@@ -32,7 +33,7 @@ public class ChatWebsocketTopic {
     private StompSessionHandler sessionHandler = new ChatWebsocketTopicSubscribe();
     private StompSession stompSession;
 
-
+    @Autowired
     public void connectWs() throws InterruptedException, ExecutionException {
 
     	stompClient.setMessageConverter(new MappingJackson2MessageConverter());

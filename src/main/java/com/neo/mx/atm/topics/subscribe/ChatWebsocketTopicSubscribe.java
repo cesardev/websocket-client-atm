@@ -20,6 +20,23 @@ public class ChatWebsocketTopicSubscribe extends StompSessionHandlerAdapter {
 	@Override
     public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
 		session.subscribe("/chat/mensaje", this);
+		
+		Platform.runLater( new Runnable() {
+
+			@Override
+			public void run() {
+				AnimationType type = AnimationType.POPUP;
+				
+		        TrayNotification tray = new TrayNotification();;
+		        
+		        tray.setAnimationType(type);
+		        tray.setTitle("Conexión a websocket");
+		        tray.setMessage("Suscrito al websocket");
+		        tray.setNotificationType(NotificationType.SUCCESS);
+		        tray.showAndDismiss(Duration.millis(3000));
+			}
+			
+		});
     }
 
 	@Override
@@ -35,8 +52,8 @@ public class ChatWebsocketTopicSubscribe extends StompSessionHandlerAdapter {
 	
 	@Override
     public void handleFrame(StompHeaders headers, Object payload) {
+
 		MensajeVO msg = (MensajeVO) payload;
-//        System.out.println("Received : "+ msg);
 		
 		Platform.runLater( new Runnable() {
 
@@ -49,8 +66,9 @@ public class ChatWebsocketTopicSubscribe extends StompSessionHandlerAdapter {
 		        tray.setAnimationType(type);
 		        tray.setTitle(msg.getUsername());
 		        tray.setMessage(msg.getTexto());
-		        tray.setNotificationType(NotificationType.SUCCESS);
-		        tray.showAndDismiss(Duration.millis(3000));
+		        tray.setNotificationType(NotificationType.INFORMATION);
+		        tray.showAndWait();
+//		        tray.showAndDismiss(Duration.millis(3000));
 			}
 			
 		});

@@ -6,10 +6,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
+
+import java.util.concurrent.ExecutionException;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import com.neo.mx.atm.controllers.MyController;
+import com.neo.mx.atm.topics.ChatWebsocketTopic;
 
 public class JavaFxApplication extends Application {
 
@@ -23,12 +28,14 @@ public class JavaFxApplication extends Application {
 	}
 
 	@Override
-	public void start(Stage stage) {
-		FxWeaver fxWeaver = applicationContext.getBean(FxWeaver.class);
-		Parent root = fxWeaver.loadView(MyController.class);
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+	public void start(Stage stage) throws InterruptedException {
+//		FxWeaver fxWeaver = applicationContext.getBean(FxWeaver.class);
+//		Parent root = fxWeaver.loadView(MyController.class);
+//		Scene scene = new Scene(root);
+//		stage.setScene(scene);
+//		stage.show();
+		Platform.setImplicitExit(false);
+
 	}
 
 	@Override

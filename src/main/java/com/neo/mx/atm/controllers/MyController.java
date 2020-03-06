@@ -12,19 +12,20 @@ import org.springframework.stereotype.Component;
 
 import com.neo.mx.atm.topics.ChatWebsocketTopic;
 
-@Component
-@FxmlView("main-stage.fxml")
+//@Component
+//@FxmlView("main-stage.fxml")
 public class MyController {
 
     @FXML
     private Label weatherLabel;
     private ChatWebsocketTopic chatWebsocketTopic;
 
-    @Autowired
-    public MyController(ChatWebsocketTopic chatWebsocketTopic) {
-        this.chatWebsocketTopic = chatWebsocketTopic;
-    }
-
+//    @Autowired
+//    public MyController(ChatWebsocketTopic chatWebsocketTopic) throws InterruptedException, ExecutionException {
+//        this.chatWebsocketTopic = chatWebsocketTopic;
+//        conectarWs( new ActionEvent() );
+//    }
+    
     public void conectarWs( ActionEvent actionEvent ) throws InterruptedException, ExecutionException {
 //        this.weatherLabel.setText(weatherService.getWeatherForecast());
     	chatWebsocketTopic.connectWs();
