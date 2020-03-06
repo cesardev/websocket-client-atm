@@ -17,6 +17,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<locallibs>D:\Neo-crm\Workspace-test\websocket-client-atm\src\main\resources\libs</locallibs>
 	</properties>
 
 	<dependencies>
@@ -26,9 +27,49 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>net.rgielen</groupId>
 			<artifactId>javafx-weaver-spring-boot-starter</artifactId>
 			<version>1.3.0</version>
+		</dependency>
+
+		<!-- SOCK JS CLIENT -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>webjars-locator-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>sockjs-client</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>stomp-websocket</artifactId>
+			<version>2.3.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>3.3.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.1.1-1</version>
+		</dependency>
+
+		<!-- TRAY NOTIFICATION -->
+		<dependency>
+			<groupId>com.github.plushaze.traynotification</groupId>
+			<artifactId>TrayNotification</artifactId>
+			<version>0.3</version>
+			<scope>system</scope>
+			<systemPath>${locallibs}\TrayNotification.jar</systemPath>
 		</dependency>
 
 		<dependency>
