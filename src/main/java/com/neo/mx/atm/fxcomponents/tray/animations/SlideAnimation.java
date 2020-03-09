@@ -35,9 +35,11 @@ public class SlideAnimation implements TrayAnimation {
         KeyFrame frame1 = new KeyFrame(Duration.ZERO, kvX);
 
         //Animates the Tray onto the screen and interpolates at a tangent for 300 millis
-        Interpolator interpolator = Interpolator.TANGENT(Duration.millis(300), 50);
+//        Interpolator interpolator = Interpolator.TANGENT(Duration.millis(300), 50);
+        Interpolator interpolator = Interpolator.TANGENT(Duration.millis(2000), 600);
         KeyValue kvInter = new KeyValue(stage.xLocationProperty(), stage.getBottomRight().getX(), interpolator);
-        KeyFrame frame2 = new KeyFrame(Duration.millis(1300), kvInter);
+//        KeyFrame frame2 = new KeyFrame(Duration.millis(1300), kvInter);
+        KeyFrame frame2 = new KeyFrame(Duration.millis(300), kvInter);
 
         //Sets opacity to 0 instantly
         KeyValue kvOpacity = new KeyValue(stage.opacityProperty(), 0.0);
@@ -45,7 +47,8 @@ public class SlideAnimation implements TrayAnimation {
 
         //Increases the opacity to fully visible whilst moving in the space of 1000 millis
         KeyValue kvOpacity2 = new KeyValue(stage.opacityProperty(), 1.0);
-        KeyFrame frame4 = new KeyFrame(Duration.millis(1000), kvOpacity2);
+//        KeyFrame frame4 = new KeyFrame(Duration.millis(1000), kvOpacity2);
+        KeyFrame frame4 = new KeyFrame(Duration.millis(300), kvOpacity2);
 
         tl.getKeyFrames().addAll(frame1, frame2, frame3, frame4);
 
@@ -59,17 +62,20 @@ public class SlideAnimation implements TrayAnimation {
         Timeline tl = new Timeline();
 
         double offScreenX = stage.getOffScreenBounds().getX();
-        Interpolator interpolator = Interpolator.TANGENT(Duration.millis(300), 50);
+//        Interpolator interpolator = Interpolator.TANGENT(Duration.millis(300), 50);
+        Interpolator interpolator = Interpolator.TANGENT(Duration.millis(1500), 600);
         double trayPadding = 3;
 
         //The destination X location for the stage. Which is off the users screen
         //Since the tray has some padding, we want to hide that too
         KeyValue kvX = new KeyValue(stage.xLocationProperty(), offScreenX + trayPadding, interpolator);
-        KeyFrame frame1 = new KeyFrame(Duration.millis(1400), kvX);
+//        KeyFrame frame1 = new KeyFrame(Duration.millis(1400), kvX);
+        KeyFrame frame1 = new KeyFrame(Duration.millis(300), kvX);
 
         //Change the opacity level to 0.4 over the duration of 2000 millis
         KeyValue kvOpacity = new KeyValue(stage.opacityProperty(), 0.4);
-        KeyFrame frame2 = new KeyFrame(Duration.millis(2000), kvOpacity);
+//        KeyFrame frame2 = new KeyFrame(Duration.millis(2000), kvOpacity);
+        KeyFrame frame2 = new KeyFrame(Duration.millis(100), kvOpacity);
 
         tl.getKeyFrames().addAll(frame1, frame2);
 

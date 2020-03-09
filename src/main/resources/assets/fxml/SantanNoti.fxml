@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="SantanNoti" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="438.0" style="-fx-border-color: gray; -fx-border-width: 1; -fx-background-color: #fafafa" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <Pane fx:id="paneHead" layoutX="1.0" layoutY="1.0" prefHeight="44.0" prefWidth="436.0" style="-fx-border-color: #bdc3c7; -fx-border-width: 1; -fx-background-color: #ecf0f1">
+      <children>
+        <ImageView id="" fx:id="imageIconFrom" fitHeight="25.0" fitWidth="30.0" layoutX="11.0" layoutY="8.0" pickOnBounds="true">
+          <image>
+            <Image url="@../Pictures/Neo/Logos/santander.png" />
+          </image>
+        </ImageView>
+        <Label id="" fx:id="labelFrom" layoutX="54.0" layoutY="0.0" minHeight="22.0" prefHeight="40.0" text="Santander" textAlignment="CENTER" textFill="#636e72" wrapText="true">
+          <font>
+            <Font name="Myanmar Text Bold" size="18.0" />
+          </font>
+        </Label>
+        <ImageView id="" fx:id="imageIconClose" fitHeight="25.0" fitWidth="25.0" layoutX="399.0" layoutY="9.0" pickOnBounds="true">
+          <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+          <image>
+            <Image url="@../Pictures/Neo/Logos/minimize.png" />
+          </image>
+        </ImageView>
+      </children>
+    </Pane>
+    <Rectangle fx:id="rectangleColor" arcHeight="5.0" arcWidth="5.0" disable="false" height="58.0" layoutX="20.0" layoutY="72.0" stroke="GREY" strokeMiterLimit="10.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-width: 5;" width="10.0">
+      <fill>
+        <Color blue="0.200" green="0.200" red="1.000" fx:id="x1" />
+      </fill>
+    </Rectangle>
+    <ImageView fx:id="imageIcon" fitHeight="58.0" fitWidth="130.0" layoutX="36.0" layoutY="72.0" pickOnBounds="true">
+      <image>
+        <Image url="@../Pictures/Neo/Logos/neo.png" />
+      </image>
+    </ImageView>
+    <Label id="" fx:id="lblTitulo" layoutX="189.0" layoutY="70.0" prefHeight="25.0" prefWidth="228.0" text="FALLA DE ATM REPORTADA" wrapText="true">
+      <font>
+        <Font name="Myanmar Text Bold" size="16.0" />
+      </font>
+      <textFill>
+        <Color blue="0.212" green="0.204" red="0.176" fx:id="x2" />
+      </textFill>
+    </Label>
+    <Label id="" fx:id="lblUsuario" layoutX="189.0" layoutY="105.0" text="Usuario: Z877415" textFill="$x2" wrapText="true">
+      <font>
+        <Font name="Myanmar Text" size="16.0" fx:id="x4" />
+      </font>
+    </Label>
+    <Rectangle id="" fx:id="rectangleColorDesc" arcHeight="5.0" arcWidth="5.0" disable="false" fill="$x1" height="182.0" layoutX="20.0" layoutY="177.0" stroke="GREY" strokeMiterLimit="10.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-width: 5;" width="10.0" />
+    <Label id="" fx:id="labelAtm" layoutX="41.0" layoutY="177.0" prefHeight="25.0001220703125" prefWidth="87.0" text="ATM:" wrapText="true">
+      <font>
+        <Font name="System Bold" size="16.0" fx:id="x3" />
+      </font>
+    </Label>
+    <Label id="" fx:id="labelAtmTxt" font="$x4" layoutX="89.0" layoutY="172.0" prefWidth="87.0" text="Sin dato" textFill="$x2" wrapText="true" />
+    <Label id="" fx:id="labelEstatus" font="$x3" layoutX="189.0" layoutY="178.0" prefHeight="25.0" prefWidth="87.0" text="ESTATUS:" wrapText="true" />
+    <Label id="" fx:id="labelEstatusTxt" font="$x4" layoutX="270.0" layoutY="171.0" prefWidth="161.0" text="Sin dato" textFill="$x2" wrapText="true" />
+    <Label id="" fx:id="labelMotivo" font="$x3" layoutX="41.0" layoutY="217.0" prefHeight="25.0" prefWidth="110.0" text="MOTIVO:" wrapText="true" />
+    <Label id="" fx:id="labelMotivoTxt" font="$x4" layoutX="42.0" layoutY="240.0" prefHeight="32.0" prefWidth="389.0" text="Sin dato" textFill="$x2" wrapText="true" />
+    <Label id="" fx:id="labelFalla" font="$x3" layoutX="41.0" layoutY="293.0" prefHeight="25.0" prefWidth="110.0" text="FALLA:" wrapText="true" />
+    <Label id="" fx:id="labelFallaTxt" font="$x4" layoutX="99.0" layoutY="286.5" prefHeight="32.0" prefWidth="332.0" text="Sin dato" textFill="$x2" wrapText="true" />
+    <Label id="" fx:id="labelFecha" font="$x3" layoutX="41.0" layoutY="334.0" prefHeight="25.0" prefWidth="110.0" text="FECHA:" wrapText="true" />
+    <Label id="" fx:id="labelFechaTxt" font="$x4" layoutX="101.0" layoutY="327.5" prefHeight="32.0" prefWidth="332.0" text="Sin dato" textFill="$x2" wrapText="true" />
+    <Button id="" fx:id="btnAceptar" layoutX="187.0" layoutY="420.0" mnemonicParsing="false"
+    	style="-fx-background-color: #ec0000; -fx-cursor: hand;" text="Aceptar" textAlignment="CENTER"
+    	textFill="#fafafa" textOverrun="ELLIPSIS" underline="false" />
+  </children>
+</AnchorPane>

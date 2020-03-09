@@ -18,9 +18,7 @@ import javafx.scene.paint.Paint;
 import javafx.util.Duration;
 
 import com.neo.mx.atm.fxcomponents.tray.notification.NotificationType;
-//import tray.notification.TrayNotification;
-//import tray.animations.AnimationType;
-//import tray.notification.NotificationType;
+import com.neo.mx.atm.fxcomponents.tray.notification.SantanNoti;
 
 
 public class ChatWebsocketTopicSubscribe extends StompSessionHandlerAdapter {
@@ -33,15 +31,17 @@ public class ChatWebsocketTopicSubscribe extends StompSessionHandlerAdapter {
 
 			@Override
 			public void run() {
+				
 				AnimationType type = AnimationType.POPUP;
 				
 		        TrayNotification tray = new TrayNotification();;
 		        
 		        tray.setAnimationType(type);
-		        tray.setTitle("Conexión a websocket");
-		        tray.setMessage("Suscrito al websocket");
+		        tray.setTitle("ATM CONNECT");
+		        tray.setMessage(System.getProperty("user.name").toUpperCase() + ", ahora estas conectado a ATM CONNECT");
 		        tray.setNotificationType(NotificationType.SUCCESS);
 		        tray.showAndDismiss(Duration.millis(3000));
+
 			}
 			
 		});
@@ -67,24 +67,25 @@ public class ChatWebsocketTopicSubscribe extends StompSessionHandlerAdapter {
 
 			@Override
 			public void run() {
+
 				AnimationType type = AnimationType.POPUP;
-				
-		        TrayNotification tray = new TrayNotification();;
+				SantanNoti notiSantan = new SantanNoti();
 
-//		        Image santanImg = new Image("D:\\Neo-crm\\Workspace-test\\websocket-client-atm\\src\\main\\resources\\assets\\img\\logo-santan-cut.jpg");
+		        File santanImg = new File(getClass().getResource("/assets/img/santander.png").getFile());
+		        File neoImg = new File(getClass().getResource("/assets/img/neo.png").getFile());
 
-		        File santanImg = new File("D:\\Neo-crm\\Workspace-test\\websocket-client-atm\\src\\main\\resources\\assets\\img\\santander.png");
+		        notiSantan.setAnimationType(type);
+		        notiSantan.setTitulo(msg.getTexto().toUpperCase());
+		        notiSantan.setUsuario(msg.getUsername());
+		        notiSantan.setNotificationType(NotificationType.INFORMATION);
+		        notiSantan.showAndWait();
+//		        notiSantan.setAnimationType(AnimationType.FADE);
+		        notiSantan.setRectangleFill(Paint.valueOf("#ec0000"));
+		        notiSantan.setImage(new Image(neoImg.toURI().toString()));
+		        notiSantan.setTrayIcon(new Image(santanImg.toURI().toString()));
+//		        notiSantan.setAnimationType(AnimationType.FADE);
+//		        notiSantan.showAndDismiss(Duration.millis(3000));
 
-		        tray.setAnimationType(type);
-		        tray.setTitle(msg.getUsername());
-		        tray.setMessage(msg.getTexto());
-		        tray.setNotificationType(NotificationType.INFORMATION);
-		        tray.showAndWait();
-		        tray.setRectangleFill(Paint.valueOf("#ec0000"));
-		        tray.setImage(new Image(santanImg.toURI().toString()));
-		        tray.setTrayIcon(new Image(santanImg.toURI().toString()));
-//		        tray.setAnimationType(AnimationType.FADE);
-//		        tray.showAndDismiss(Duration.millis(3000));
 			}
 			
 		});

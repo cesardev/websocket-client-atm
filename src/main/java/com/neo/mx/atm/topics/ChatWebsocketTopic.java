@@ -24,7 +24,8 @@ import javafx.event.ActionEvent;
 @Service
 public class ChatWebsocketTopic {
 
-	private static String URL = "http://180.177.87.107:8080/chat-websocket";
+//	private static String URL = "http://180.177.87.107:8080/chat-websocket";
+	private static String URL = "http://localhost:8080/chat-websocket";
 
 	private Transport webSocketTransport = new WebSocketTransport(new StandardWebSocketClient());
     private List<Transport> transports = Collections.singletonList(webSocketTransport);

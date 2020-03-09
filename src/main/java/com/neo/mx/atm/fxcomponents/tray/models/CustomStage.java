@@ -9,7 +9,7 @@ import javafx.stage.StageStyle;
 
 public class CustomStage extends Stage {
 
-    private final Location bottomRight;
+    private Location bottomRight;
 
     public CustomStage(AnchorPane ap, StageStyle style) {
         initStyle(style);

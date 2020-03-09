@@ -1,5 +1,18 @@
 package com.neo.mx.atm.fxcomponents.tray.notification;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
+import com.neo.mx.atm.fxcomponents.tray.animations.AnimationProvider;
+import com.neo.mx.atm.fxcomponents.tray.animations.AnimationType;
+import com.neo.mx.atm.fxcomponents.tray.animations.FadeAnimation;
+import com.neo.mx.atm.fxcomponents.tray.animations.PopupAnimation;
+import com.neo.mx.atm.fxcomponents.tray.animations.SlideAnimation;
+import com.neo.mx.atm.fxcomponents.tray.animations.TrayAnimation;
+import com.neo.mx.atm.fxcomponents.tray.models.CustomStage;
+import com.neo.mx.atm.models.AtmVO;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,28 +27,16 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-import java.io.IOException;
-import java.net.URL;
-
-import com.neo.mx.atm.fxcomponents.tray.animations.AnimationProvider;
-import com.neo.mx.atm.fxcomponents.tray.animations.AnimationType;
-import com.neo.mx.atm.fxcomponents.tray.animations.FadeAnimation;
-import com.neo.mx.atm.fxcomponents.tray.animations.PopupAnimation;
-import com.neo.mx.atm.fxcomponents.tray.animations.SlideAnimation;
-import com.neo.mx.atm.fxcomponents.tray.animations.TrayAnimation;
-import com.neo.mx.atm.fxcomponents.tray.models.CustomStage;
-import com.sun.javafx.css.Style;
-
-public final class TrayNotification {
-
+public final class SantanNoti {
+	
+	@FXML
+    private Label lblTitulo, lblUsuario, lblClose, labelFrom, labelAtmTxt, labelEstatusTxt, labelMotivoTxt, labelFallaTxt, labelFechaTxt;
     @FXML
-    private Label lblTitle, lblMessage, lblClose;
+    private ImageView imageIcon, imageIconFrom, imageIconClose;
     @FXML
-    private ImageView imageIcon;
+    private Rectangle rectangleColor, rectangleColorDesc;
     @FXML
-    private Rectangle rectangleColor;
-    @FXML
-    private AnchorPane popupNotiNode;
+    private AnchorPane SantanNoti;
 
     private CustomStage stage;
     private NotificationType notificationType;
@@ -46,13 +47,13 @@ public final class TrayNotification {
 
     /**
      * Initializes an instance of the tray notification object
-     * @param title The title text to assign to the tray
+     * @param titulo The titulo text to assign to the tray
      * @param body The body text to assign to the tray
      * @param img The image to show on the tray
      * @param rectangleFill The fill for the rectangle
      */
-    public TrayNotification(String title, String body, Image img, Paint rectangleFill) {
-        initTrayNotification(title, body, NotificationType.CUSTOM);
+    public SantanNoti(String titulo, String body, Image img, Paint rectangleFill) {
+        initTrayNotification(titulo, body, NotificationType.CUSTOM);
 
         setImage(img);
         setRectangleFill(rectangleFill);
@@ -60,33 +61,33 @@ public final class TrayNotification {
 
     /**
      * Initializes an instance of the tray notification object
-     * @param title The title text to assign to the tray
+     * @param titulo The titulo text to assign to the tray
      * @param body The body text to assign to the tray
      * @param notificationType The notification type to assign to the tray
      */
-    public TrayNotification(String title, String body, NotificationType notificationType ) {
-        initTrayNotification(title, body, notificationType);
+    public SantanNoti(String titulo, String body, NotificationType notificationType ) {
+        initTrayNotification(titulo, body, notificationType);
     }
 
     /**
      * Initializes an empty instance of the tray notification
      */
-    public TrayNotification() {
+    public SantanNoti() {
         initTrayNotification("", "", NotificationType.CUSTOM);
     }
 
-    private void initTrayNotification(String title, String message, NotificationType type) {
+    private void initTrayNotification(String titulo, String usuario, NotificationType type) {
 
         try {
 
-        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/assets/fxml/TrayNotification.fxml"));
+        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/assets/fxml/SantanNoti.fxml"));
         	fxmlLoader.setController(this);
             fxmlLoader.load();
 
             initStage();
             initAnimations();
 
-            setTray(title, message, type);
+            setTray(titulo, usuario, type);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -102,15 +103,19 @@ public final class TrayNotification {
         setAnimationType(AnimationType.SLIDE);
     }
 
-    private void initStage() {
+	private void initStage() {
 
-        stage = new CustomStage(popupNotiNode, StageStyle.UNDECORATED);
-        stage.setScene(new Scene(popupNotiNode));
+        stage = new CustomStage(SantanNoti, StageStyle.UNDECORATED);
+        stage.setScene(new Scene(SantanNoti));
         stage.setAlwaysOnTop(true);
         stage.setLocation(stage.getBottomRight());
 
+        stage.setTitle("Santander");
+        stage.setMaximized(false);
+        stage.setResizable(false);
 //        lblClose.setOnMouseClicked(e -> dismiss());
-        lblClose.setVisible(false);
+//        lblClose.setVisible(false);
+        imageIconClose.setOnMouseClicked( e -> dismiss() );
     }
 
     public void setNotificationType(NotificationType nType) {
@@ -119,6 +124,8 @@ public final class TrayNotification {
 
         URL imageLocation = null;
         String paintHex = null;
+        File santanImg = new File(getClass().getResource("/assets/img/santander.png").getFile());
+        File closeImg = new File(getClass().getResource("/assets/img/minimize.png").getFile());
 
         switch (nType) {
 
@@ -154,21 +161,23 @@ public final class TrayNotification {
         setRectangleFill(Paint.valueOf(paintHex));
         setImage(new Image(imageLocation.toString()));
         setTrayIcon(imageIcon.getImage());
+        setImageIconFrom(new Image(santanImg.toURI().toString()));
+        setImageIconClose(new Image(closeImg.toURI().toString()));
     }
 
     public NotificationType getNotificationType() {
         return notificationType;
     }
 
-    public void setTray(String title, String message, NotificationType type) {
-        setTitle(title);
-        setMessage(message);
+    public void setTray(String titulo, String usuario, NotificationType type) {
+        setTitulo(titulo);
+        setUsuario(usuario);
         setNotificationType(type);
     }
 
-    public void setTray(String title, String message, Image img, Paint rectangleFill, AnimationType animType) {
-        setTitle(title);
-        setMessage(message);
+    public void setTray(String titulo, String usuario, Image img, Paint rectangleFill, AnimationType animType) {
+        setTitulo(titulo);
+        setUsuario(usuario);
         setImage(img);
         setRectangleFill(rectangleFill);
         setAnimationType(animType);
@@ -260,42 +269,76 @@ public final class TrayNotification {
         return stage.getIcons().get(0);
     }
 
-    /**
-     * Sets a title to the tray
-     * @param txt The text to assign to the tray icon
-     */
-    public void setTitle(String txt) {
-        lblTitle.setText(txt);
-    }
-
-    public String getTitle() {
-        return lblTitle.getText();
-    }
-
-    /**
-     * Sets the message for the tray notification
-     * @param txt The text to assign to the body of the tray notification
-     */
-    public void setMessage(String txt) {
-        lblMessage.setText(txt);
-    }
-
-    public String getMessage() {
-        return lblMessage.getText();
-    }
-
     public void setImage (Image img) {
         imageIcon.setImage(img);
 
         setTrayIcon(img);
     }
+    
+
+/*
+ * 
+ */
+//  SETEO POR ELEMENTOS DE NOTIFICACIÓN
+    public void setTitulo(String txt) {
+        lblTitulo.setText(txt);
+    }
+
+    public void setUsuario(String txt) {
+        lblUsuario.setText(txt);
+    }
+
+    public void setLabelAtmTxt( String txt ) {
+    	labelAtmTxt.setText( txt );
+    }
+
+    public void setLabelEstatusTxt( String txt ) {
+    	labelEstatusTxt.setText( txt );
+    }
+
+    public void setLabelMotivoTxt( String txt ) {
+    	labelMotivoTxt.setText( txt );
+    }
+
+    public void setLabelFallaTxt( String txt ) {
+    	labelFallaTxt.setText( txt );
+    }
+
+    public void setLabelFechaTxt( String txt ) {
+    	labelFechaTxt.setText( txt );
+    }
+
+//  SETEO GENERAL DE DATOS A LA NOTIFICACIÓN
+    public void setDataNoti( AtmVO atm ) {
+    	lblTitulo.setText( atm.getTitulo() );
+    	lblUsuario.setText( atm.getUsuario() );
+    	labelAtmTxt.setText( atm.getCodigoAtm().toString() );
+    	labelEstatusTxt.setText( atm.getEstatus() );
+    	labelMotivoTxt.setText( atm.getMotivo() );
+    	labelFallaTxt.setText( atm.getFalla() );
+    	labelFechaTxt.setText( atm.getFecha() );
+    }
+/*
+ * 
+ */
+    
+
 
     public Image getImage() {
         return imageIcon.getImage();
     }
 
+    public void setImageIconFrom(Image img) {
+    	imageIconFrom.setImage(img);
+    }
+    
+    public void setImageIconClose(Image img) {
+    	imageIconClose.setImage(img);
+    }
+
     public void setRectangleFill(Paint value) {
         rectangleColor.setFill(value);
+        rectangleColorDesc.setFill(value);
     }
 
     public Paint getRectangleFill() {
@@ -303,12 +346,13 @@ public final class TrayNotification {
     }
 
     public void setAnimationType(AnimationType type) {
-        animator = animationProvider.findFirstWhere(a -> a.getAnimationType() == type);
-
+    	AnimationType typeTmp = AnimationType.SLIDE;
+        animator = animationProvider.findFirstWhere(a -> a.getAnimationType() == typeTmp);
         animationType = type;
     }
 
     public AnimationType getAnimationType() {
         return animationType;
     }
+
 }
